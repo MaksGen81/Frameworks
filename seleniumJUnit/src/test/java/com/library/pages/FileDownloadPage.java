@@ -1,0 +1,19 @@
+package com.library.pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import com.library.utilities.BrowserUtils;
+
+import java.io.IOException;
+
+public class FileDownloadPage extends PageBase {
+
+    @FindBy(xpath = "//a[contains(@href,'download')]")
+    protected WebElement downloadLink;
+
+    public void downloadFile() throws IOException {
+        downloadLink.click();
+        BrowserUtils.wait(5);
+
+    }
+}

@@ -1,0 +1,90 @@
+    Java Maps Interface
+1. An object that maps keys to values.
+2. A map cannot contain duplicate keys
+3. Each key can map to at most one value.
+4. This interface takes the place of the Dictionary class,
+which was a totally abstract class rather than an interface.
+5. Map doesn’t guarantee order of mappings, however it depends on the implementation.
+For example, HashMap doesn’t guarantee the order of mappings but TreeMap does.
+6. Map utilize hashCode and equals methods on Key for get and put operations.
+So mutable classes are not a good fit for Map keys. If the values of hashCode or equals change after put,
+you won’t get the correct value in get operation
+
+      Why and when to use maps?
+A map of error codes and their descriptions.
+A map of zip codes and cities.
+A map of employees and employee ID.
+A map of classes and students.
+
+Methods of Map:
+1) Object put(Object key, Object value) : is used to insert an entry in this map.
+
+2) void putAll(Map map) : is used to insert the specified map in this map.
+
+3) Object remove(Object key) : is used to delete an entry for the specified key.
+
+4) Object get(Object key) : is used to return the value for the specified key.
+
+5) boolean containsKey(Object key) : is used to search the specified key from this map.
+
+6) boolean containsValue(Object value): returns true if there are at least one key mapped to the specified value, otherwise false.
+
+7) Set keySet() : returns the Set view containing all the keys.
+
+8) Set entrySet() : returns the Set view containing all the keys and values.
+
+9) int size(): returns the number of key-value mappings in this Map.
+
+10) boolean isEmpty(): returns true if there are no mappings present, otherwise false.
+
+11) void clear(): removes all the mappings from the Map.
+
+10) Collection<V> values(): returns the collection view of all the values in the Map. This collection is backed by Map, so any change in Map will reflect to this values collection and vice versa.
+
+11) Set<Map.Entry<K, V>> entrySet(): returns the Set view of the mappings in the Map. This Set is backed by Map, so any modifications in Map will be reflected in the entry set and vice versa.
+
+Maps are further classified into the following:
+HashMap
+LinkedHashMap
+HashTable
+TreeMap
+
+HashMap and Hashtable - doesn’t maintain any order.
+TreeMap - sort the entries in ascending order of keys.
+LinkedHashMap - maintains the insertion order.
+
+1) HashMap
+A HashMap stores Key & value pairs.
+It contains only unique elements.
+It maintains no order.
+It is similar to the Hashtable class except that it is unsynchronized and permits nulls
+It may have one null key and multiple null values.
+Declaration:
+HashMap<Integer, String> hm = new HashMap<>();
+or
+Map m1 = new HashMap();
+
+2) LinkedHashMap
+A LinkedHashMap contains values based on the key.
+It may have one null key and multiple null values.
+This implementation differs from HashMap in that it maintains a doubly-linked list running through all of its entries.
+This linked list defines the iteration ordering, which is normally the order in which keys were inserted into the map (insertion-order).
+Declaration:
+LinkedHashMap<Integer, String> lhmap = new LinkedHashMap<Integer, String>();
+
+3) TreeMap
+TreeMap class implements Map interface similar to HashMap class.
+The main difference between them is that HashMap is an unordered collection while TreeMap is sorted in the ascending order of its keys.
+TreeMap is unsynchronized collection class.
+Declaration:
+TreeMap<Integer, String> tmap = new TreeMap<Integer, String>();
+
+4) HashTable
+Java Hashtable class implements a hashtable, which maps keys to values.
+It inherits Dictionary class and implements the Map interface.
+Any non-null object can be used as a key or as a value.
+It contains only unique elements.
+It may have not have any null key or value.
+It is synchronized an thread-safe.
+Declaration:
+Hashtable<Integer,String> hm = new Hashtable<Integer,String>();

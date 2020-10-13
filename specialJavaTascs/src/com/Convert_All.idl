@@ -1,0 +1,90 @@
+
+    Array->LinkedHashSet->Array
+
+   Integer[] numbers = new Integer[] {3,4,3,4,5,1,3,5,6};
+   LinkedHashSet<Integer> linkArr=new LinkedHashSet<>(Arrays.asList(numbers));
+   Integer[] newArr = linkArr.toArray(new Integer[]{});
+
+           String [] arr = str.split("");  //  String -> LinkedHashSe
+           LinkedHashSet<String> set = new LinkedHashSet<>(Arrays.asList(arr));
+
+   public static List<String> noZ(List<String> strings) {   //  Collectors Ex:
+          strings.removeIf(n -> n.contains("z"));
+           return strings;
+       }
+
+           List<String> strList = new ArrayList<>();
+           String listToString = strList.toString();               //  List --> String
+           List<String> superHeroCopy = new ArrayList<>(strList);  //  copy From List to List
+
+           List<String> topic = Arrays.asList("Java", "Selenium", "Database", "API");  //  Unmodifiable but in on row
+           List<String> topicsCopy = new ArrayList<>(topic);    //      This you can modify
+           List<String> topicInOneShot = new ArrayList<>(Arrays.asList("Java", "Selenium", "Database", "API"));
+
+           String str = String.valueOf(123);         //   int-->String
+           String str1 = "123";
+           System.out.println(str1 + 1);             //   1231   coz String
+           int result = Integer.parseInt(str1);      //   String--> int
+           System.out.println(result + 1);           //   124    coz int
+
+           char myChar = '7';                                 //  you can store String ->int  .  3 way
+           int myNum = Integer.parseInt(myChar + "");        //  1
+           Character.toString(myChar);                        //  2
+           String.valueOf(myChar);
+
+           String a1 ="aabbbc";
+           char[] ch1 = a1.toCharArray();                // String -->char[]
+           String str3 = Arrays.toString(ch1);           //  char[] -->String
+
+           boolean result1 = ! Boolean.valueOf("TruE");  // unboxing
+           System.out.println(result1);  // ValueOf methods ignores the case sensitivity
+
+           System.exit(0);   // exits all the java execution
+
+           int[] nums = {11, 33, 44, 11, 33, 44, 22, 22, 55, 44, 33}; //  int[]-->List same int-->ArrayList
+           ArrayList<Integer> uniqueLst = new ArrayList<>();
+           for (int each : nums) {
+               uniqueLst.add(each);
+           }      //   Output:  uniqueLst = [11, 33, 44, 11, 33, 44, 22, 22, 55, 44, 33]
+           System.out.println("uniqueLst = " + uniqueLst);
+
+           Integer[] arr = {1, 2, 3, 4, 5};            //   int --->ArrayList
+           ArrayList<Integer> list2 = new ArrayList<>(Arrays.asList(arr));
+
+           String[] arr2 = {"Java", "Python", "c#", "c++"};  //  String --> ArrayList
+           ArrayList<String> list3 = new ArrayList<>(Arrays.asList(arr2));
+
+           String[] students = {"Nursultan", "Irina", "Dilshat", "Roksana"};
+           List<String> names = new ArrayList<>(Arrays.asList(students));  //  String[] --> List
+
+           List<String> numLst = Arrays.asList("79", "54", "100", "65", "44", "78", "68", "98", "89", "77");
+           for (String each : numLst) {                  //   List -->  String
+               int eachNum = Integer.parseInt(each);   //   String--> int
+               System.out.print(eachNum + " ");          //   Output:  79 54 100 65 44 78 68 98 89 77
+
+               List<String> names3 = new ArrayList<>();    //   String[] --> List
+               String[] students3 ={"Nursultan","Irina","Dilshat","Roksana"};
+               names.addAll( Arrays.asList(students));
+
+           List<Integer> nums1 = new ArrayList<>(Arrays.asList(300, 200, 700, 600, 800));
+           nums1.addAll(nums2);                              add multipl item
+           nums2.addAll(Arrays.asList(100, 200, 300, 400));
+           Collections.sort(nums);                             //   sort
+           Collections.sort(nums, Comparator.reverseOrder());  //  reverse
+           nums.sort(Comparator.naturalOrder());                 sort
+           nums.sort(Comparator.reverseOrder());                 reverse
+
+                  import java.util.*;    // all pokets in here
+
+               char ch = scan.next().charAt(0);       //   Scaner for char,each leder.
+
+               int[][] arr2D = {  {1,2} ,  {3, 4}   };
+               System.out.println( Arrays.toString(arr2D) ); // arrays.toString cannot convert MD arrays to String
+               System.out.println(Arrays.deepToString(arr2D)); // deepToString-> convert MD arrays to String
+
+                                                                     // forEach(action) method to iterate map
+               mapName.forEach((k,v) -> System.out.println("Key = "+ k + ", Value = " + v));
+
+               if(Math.abs(nums1[i] - nums2[i])<=2 && nums1[i] != nums2[i]){    //  Math count function for array
+                            count++;
+                        }

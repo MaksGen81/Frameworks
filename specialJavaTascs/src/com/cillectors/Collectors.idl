@@ -1,0 +1,282 @@
+public final class Collectors
+extends Object
+Implementations of Collector that implement various useful reduction operations, such as accumulating elements into
+collections, summarizing elements according to various criteria, etc.
+The following are examples of using the predefined collectors to perform common mutable reduction tasks:
+
+
+     // Accumulate names into a List
+     List<String> list = people.stream().map(Person::getName).collect(Collectors.toList());
+
+     // Accumulate names into a TreeSet
+     Set<String> set = people.stream().map(Person::getName).collect(Collectors.toCollection(TreeSet::new));
+
+     // Convert elements to strings and concatenate them, separated by commas
+     String joined = things.stream()
+                           .map(Object::toString)
+                           .collect(Collectors.joining(", "));
+
+     // Compute sum of salaries of employee
+     int total = employees.stream()
+                          .collect(Collectors.summingInt(Employee::getSalary)));
+
+     // Group employees by department
+     Map<Department, List<Employee>> byDept
+         = employees.stream()
+                    .collect(Collectors.groupingBy(Employee::getDepartment));
+
+     // Compute sum of salaries by department
+     Map<Department, Integer> totalByDept
+         = employees.stream()
+                    .collect(Collectors.groupingBy(Employee::getDepartment,
+                                                   Collectors.summingInt(Employee::getSalary)));
+
+     // Partition students into passing and failing
+     Map<Boolean, List<Student>> passingFailing =
+         students.stream()
+                 .collect(Collectors.partitioningBy(s -> s.getGrade() >= PASS_THRESHOLD));
+
+                 ==================================
+                 Java Collectors Examples
+
+                 Let’s look at the examples of Collectors functions with simple examples.
+
+                 1. toCollection(Supplier)
+
+                 This function returns a Collector that accumulates the input elements into a collection.
+     List<String> strList = Arrays.asList("a", "b", "c", "b", "a");
+
+     // toCollection()
+     Collection<String> strCollection = strList.parallelStream().collect(Collectors.toCollection(HashSet::new));
+     System.out.println(strCollection); // [a, b, c]
+
+     Set<String> strSet = strList.parallelStream().collect(Collectors.toCollection(HashSet::new));
+     System.out.println(strSet); // [a, b, c]
+
+     List<String> strList1 = strList.parallelStream().sorted(String::compareToIgnoreCase)
+     		.collect(Collectors.toCollection(ArrayList::new));
+     System.out.println(strList1); // [a, a, b, b, c]
+
+     2. Java Collectors toList()
+
+     It returns a Collector that accumulates the input elements into a new List.
+     List<String> strList = Arrays.asList("a", "b", "c", "b", "a");
+
+     List<String> uppercaseList = strList.parallelStream().map(String::toUpperCase).collect(Collectors.toList());
+     System.out.println(uppercaseList); // [A, B, C, B, A]
+
+     List<String> uppercaseUnmodifiableList = strList.parallelStream().map(String::toUpperCase)
+     		.collect(Collectors.toUnmodifiableList());
+     System.out.println(uppercaseUnmodifiableList); // [A, B, C, B, A]
+
+     3. Java Collectors toSet()
+
+     This method returns the Collector that accumulates the input elements into a new Set.
+     List<String> strList = Arrays.asList("a", "b", "c", "b", "a");
+
+     Set<String> uppercaseSet = strList.parallelStream().map(String::toUpperCase).collect(Collectors.toSet());
+     System.out.println(uppercaseSet); // [A, B, C]
+
+     Set<String> uppercaseUnmodifiableSet = strList.parallelStream().map(String::toUpperCase)
+     		.collect(Collectors.toUnmodifiableSet());
+     System.out.println(uppercaseUnmodifiableSet); // [A, B, C]
+
+     4. Java Collectors toMap(Function, Function)
+
+     This static method returns a Collector to accumulate input elements into a new Map. We have to specify the mapping functions to generate the map keys and values.
+
+
+     Map<String, String> map = Stream.of("a", "b", "c")
+     		.collect(Collectors.toMap(Function.identity(), String::toUpperCase));
+     System.out.println(map); // {a=A, b=B, c=C}
+
+     // Duplicate Keys will throw: Exception in thread "main"
+     // java.lang.IllegalStateException: Duplicate key a (attempted merging values A
+     // and A)
+     Map<String, String> mapD = Stream.of("a", "b", "c", "b", "a")
+     		.collect(Collectors.toMap(Function.identity(), String::toUpperCase, String::concat));
+     System.out.println(mapD); // {a=AA, b=BB, c=C}
+
+     // above are HashMap, use below to create different types of Map
+     TreeMap<String, String> mapTree = Stream.of("a", "b", "c", "b")
+     		.collect(Collectors.toMap(Function.identity(), String::toUpperCase, String::concat, TreeMap::new));
+     System.out.println(mapTree); {a=A, b=BB, c=C}
+
+     5. Java Collectors joining()
+
+     It returns a Collector that concatenate the input CharSequence elements into a new string. There are few overloaded methods to specify the delimiter and suffix/prefix strings.
+
+
+     String concat = Stream.of("a", "b").collect(Collectors.joining());
+     System.out.println(concat); // ab
+
+     String csv = Stream.of("a", "b").collect(Collectors.joining(","));
+     System.out.println(csv); // a,b
+
+     String csv1 = Stream.of("a", "b").collect(Collectors.joining(",", "[", "]"));
+     System.out.println(csv1); // [a,b]
+
+     String csv2 = Stream.of("a", new StringBuilder("b"), new StringBuffer("c")).collect(Collectors.joining(","));
+     System.out.println(csv2); // a,b
+
+     6. Java Collectors mapping(Function, Collector)
+
+     This method returns a Collector that applies the Function to the input elements and then accumulate them to the given Collector.
+
+
+     Set<String> setStr = Stream.of("a", "a", "b")
+     		.collect(Collectors.mapping(String::toUpperCase, Collectors.toSet()));
+     System.out.println(setStr); // [A, B]
+
+     Set<String> setStr1 = Stream.of("a", "a", "b")
+     		.collect(Collectors.flatMapping(s -> Stream.of(s.toUpperCase()), Collectors.toSet()));
+     System.out.println(setStr1); // [A, B]
+
+     7. filtering(Predicate, Collector)
+
+     It returns a Collector that applies the Predicate to the input elements and accumulate them to the given Collector if the predicate returns true.
+     List<String> strList2 = List.of("1", "2", "10", "100", "20", "999");
+     Set<String> set = strList2.parallelStream()
+     		.collect(Collectors.filtering(s -> s.length() < 2, Collectors.toSet()));
+     System.out.println(set); // [1, 2]
+
+     8. collectingAndThen(Collector, Function)
+
+     This static method returns a Collector that accumulates the input elements into the given Collector and then perform an additional finishing function.
+
+
+     List<String> strList2 = List.of("1", "2", "10", "100", "20", "999");
+
+     List<String> unmodifiableList = strList2.parallelStream()
+     		.collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+     System.out.println(unmodifiableList); // [1, 2, 10, 100, 20, 999]
+
+     9. counting()
+
+     This function returns a Collector that counts the number of the input elements.
+
+
+     Long evenCount = Stream.of(1, 2, 3, 4, 5).filter(x -> x % 2 == 0).collect(Collectors.counting());
+     System.out.println(evenCount); // 2
+
+     10. minBy(Comparator)
+
+     It returns a Collector that returns the minimum element based on the given comparator.
+
+
+     Optional<Integer> min = Stream.of(1, 2, 3, 4, 5).collect(Collectors.minBy((x, y) -> x - y));
+     System.out.println(min); // Optional[1]
+
+     11. maxBy(Comparator)
+
+     This method returns a Collector that returns the maximum element based on the given comparator.
+
+
+     Optional<Integer> max = Stream.of(1, 2, 3, 4, 5).collect(Collectors.minBy((x, y) -> y - x));
+     System.out.println(max); // Optional[5]
+
+     12. summingInt(ToIntFunction)
+
+     This static method returns a Collector that produces the sum of a integer-valued function applied to the input elements. There are similar functions for long and double – summingLong(ToLongFunction) and summingDouble(ToDoubleFunction).
+
+
+     List<String> strList3 = Arrays.asList("1", "2", "3", "4", "5");
+     Integer sum = strList3.parallelStream().collect(Collectors.summingInt(Integer::parseInt));
+     System.out.println(sum); // 15
+
+     Long sumL = Stream.of("12", "23").collect(Collectors.summingLong(Long::parseLong));
+     System.out.println(sumL); // 35
+
+     Double sumD = Stream.of("1e2", "2e3").collect(Collectors.summingDouble(Double::parseDouble));
+     System.out.println(sumD); // 2100.0
+
+     13. averagingInt(ToIntFunction)
+
+     It returns a Collector that produces the arithmetic mean of an integer-valued function applied to the input elements. There are similar functions for long and double – averagingLong(ToLongFunction) and averagingDouble(ToDoubleFunction).
+
+
+     List<String> strList4 = Arrays.asList("1", "2", "3", "4", "5");
+     Double average = strList4.parallelStream().collect(Collectors.averagingInt(Integer::parseInt));
+     System.out.println(average); // 3.0
+
+     Double averageL = Stream.of("12", "23").collect(Collectors.averagingLong(Long::parseLong));
+     System.out.println(averageL); // 17.5
+
+     Double averageD = Stream.of("1e2", "2e3").collect(Collectors.averagingDouble(Double::parseDouble));
+     System.out.println(averageD); // 1050.0
+
+     14. Java Collectors groupingBy(Function)
+
+     This method returns a Collector implementing a “group by” operation on input elements. The final result is a HashMap. There are few overloaded methods to specify the Supplier (final Map type, default is HashMap) and Collector (Value List type, default is ArrayList).
+
+
+     Map<Integer, List<Integer>> mapGroupBy = Stream.of(1, 2, 3, 4, 5, 4, 3)
+     		.collect(Collectors.groupingBy(x -> x * 10));
+     System.out.println(mapGroupBy); // {50=[5], 20=[2], 40=[4, 4], 10=[1], 30=[3, 3]}
+
+     15. groupingByConcurrent(Function)
+
+     It works in the same way as groupingBy() Collector. The only difference is that the Collector is concurrent and unordered. It will have better performance than the groupingBy() Collector but the ordering will not be maintained.
+
+
+     Map<Integer, List<Integer>> mapGroupBy = Stream.of(1, 2, 3, 4, 5, 4, 3)
+     		.collect(Collectors.groupingByConcurrent(x -> x * 10));
+     System.out.println(mapGroupBy); // {50=[5], 20=[2], 40=[4, 4], 10=[1], 30=[3, 3]}
+
+     16. partitioningBy(Predicate)
+
+     This method returns a Collector which partitions the input elements according to a Predicate, and organizes them into a Map<Boolean, List<T>>.
+
+
+     Map<Boolean, List<Integer>> mapPartitionBy = Stream.of(1, 2, 3, 4, 5, 4, 3)
+     		.collect(Collectors.partitioningBy(x -> x % 2 == 0));
+     System.out.println(mapPartitionBy); // {false=[1, 3, 5, 3], true=[2, 4, 4]}
+
+     17. Java Collectors reducing(BinaryOperator)
+
+     It returns a Collector which performs a reduction of its input elements under a specified BinaryOperator. This is mostly used in a multi-level reduction, such as specifying downstream Collector with groupingBy() and partitioningBy() methods.
+
+
+     Map<Boolean, Optional<Integer>> reducing = Stream.of(1, 2, 3, 4, 5, 4, 3).collect(Collectors.partitioningBy(
+     		x -> x % 2 == 0, Collectors.reducing(BinaryOperator.maxBy(Comparator.comparing(Integer::intValue)))));
+     System.out.println(reducing); // {false=Optional[5], true=Optional[4]}
+
+     18. summarizingInt(ToIntFunction)
+
+     It returns a Collector which applies an int-producing mapping function to each input element, and returns summary statistics for the resulting values such as min, max, average, count, and count.
+
+
+     IntSummaryStatistics summarizingInt = Stream.of("12", "23", "35")
+         .collect(Collectors.summarizingInt(Integer::parseInt));
+     System.out.println(summarizingInt);
+     //IntSummaryStatistics{count=3, sum=70, min=12, average=23.333333, max=35}
+     Conclusion
+
+     Java Collectors class static methods are very useful in creating Collector instance to use with Stream collect()
+     method. It covers almost all the most popular scenarios.
+
+//===============================================================================
+Java Functional API
+
+list.replaceAll(lambda) -- calls the lambda once for each item in the list, storing the result back into the list
+(or other type of collection).
+e.g. nums.replaceAll(n -> n * 2);
+
+list.removeIf(lambda) -- calls the lambda once for each item in the collection, removing each item where the
+lambda returns true.
+e.g. nums.removeIf(n -> n < 0);
+
+Simple Lambda Examples -- the data types are inferred from the context and from the type of the expression following the "->":
+n -> n * 2 -- takes Integer, returns Integer
+n -> n < 0 && n >= -10 -- takes Integer, returns boolean
+s -> s.length()  -- takes String, returns Integer
+s -> s.startsWith("hi") -- takes String, returns boolean
+
+The Java stream system provides more complicated lambda features. The stream calls do not modify the original list,
+returning a new data structure of the results. Note that the boolean logic of filter() is the opposite of removeIf().
+
+  List<Integer> nums = -something-;
+  nums = nums.stream()
+    .map(n -> n * 2)
+    .filter(n -> n >= 0)
+    .collect(Collectors.toList());

@@ -1,0 +1,20 @@
+When to use which one :
+
+ - If a string is going to remain constant throughout the program, then use String class object because a String object is immutable.
+ - If a string can change (example: lots of logic and operations in the construction of the string)
+   and will only be accessed from a single thread, using a StringBuilder is good enough.
+ - If a string can change, and will be accessed from multiple threads, use a StringBuffer because
+   StringBuffer is synchronous so you have thread-safety.
+
+StringBuffer Class: StringBuffer is a peer class of String that provides much of the functionality of strings.
+The string represents fixed-length, immutable character sequences while StringBuffer represents growable and writable
+character sequences. StringBuffer may have characters and substrings inserted in the middle or appended to the end.
+It will automatically grow to make room for such additions and often has more characters preallocated than are actually needed,
+to allow room for growth. In order to create a string buffer, an object needs to be created, (i.e.), if we wish to
+create a new string buffer with name str, then:
+
+StringBuilder Class: Similar to StringBuffer, the StringBuilder in Java represents a mutable sequence of characters.
+Since the String Class in Java creates an immutable sequence of characters, the StringBuilder class provides an alternative
+to String Class, as it creates a mutable sequence of characters. The function of StringBuilder is very much similar to the
+StringBuffer class, as both of them provide an alternative to String Class by making a mutable sequence of characters.
+Similar to StringBuffer, in order to create a new string with the name str, we need to create an object of StringBuilder, (i.e.):

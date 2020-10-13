@@ -1,0 +1,126 @@
+              //Arrays
+//Java provides a data structure, the array, which stores a fixed-size sequential collection of elements of the same type.
+//How to create an array
+array_name = new dataType[arraySize];
+dataType[] array_name = new dataType[arraySize];
+dataType[] array_name = {value0, value1, ..., value_n};
+               //Arrays methods
+int[] combinedIntArray = ArrayUtils.addAll(intArray, intArray2); // Combine two arrays
+boolean b = Arrays.asList(stringArray).contains("a");// Contains method
+ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(stringArray)); // Array to ArrayList
+arrayList.toArray(stringArr); // Arraylist to array
+ArrayUtils.reverse(intArray);// Reverse array
+System.out.println(Arrays.toString(intArray));// Print Array
+ArrayUtils.removeElement(intArray, 3);//Remove element index 3
+array.length // size of the array
+//String - array of chars
+                  //String methods
+char charAt(int index): //It returns the character at the specified index. Specified index value should be between 0 to length() -1 both inclusive. It throws IndexOutOfBoundsException if index<0||>= length of String.
+boolean equals(Object obj): //Compares the string with the specified string and returns true if both matches else false.
+boolean equalsIgnoreCase(String string): //It works same as equals method but it doesn’t consider the case while comparing strings. It does a case insensitive comparison.
+int compareTo(String string): //This method compares the two strings based on the Unicode value of each character in the strings.
+int compareToIgnoreCase(String string): //Same as CompareTo method however it ignores the case during comparison.
+boolean startsWith(String prefix, int offset): //It checks whether the substring (starting from the specified offset index) is having the specified prefix or not.
+boolean startsWith(String prefix): //It tests whether the string is having specified prefix, if yes then it returns true else false.
+boolean endsWith(String suffix): //Checks whether the string ends with the specified suffix.
+int hashCode(): //It returns the hash code of the string.
+int indexOf(int ch): //Returns the index of first occurrence of the specified character ch in the string.
+int indexOf(int ch, int fromIndex): //Same as indexOf method however it starts searching in the string from the specified fromIndex.
+int lastIndexOf(int ch): //It returns the last occurrence of the character ch in the string.
+int lastIndexOf(int ch, int fromIndex): //Same as lastIndexOf(int ch) method, it starts search from fromIndex.
+int indexOf(String str): //This method returns the index of first occurrence of specified substring str.
+int lastindexOf(String str): //Returns the index of last occurrence of string str.
+String substring(int beginIndex): //It returns the substring of the string. The substring starts with the character at the specified index.
+String substring(int beginIndex, int endIndex): //Returns the substring. The substring starts with character at beginIndex and ends with the character at endIndex.
+String concat(String str): //Concatenates the specified string “str” at the end of the string.
+String replace(char oldChar, char newChar): //It returns the new updated string after changing all the occurrences of oldChar with the newChar.
+boolean contains(CharSequence s): //It checks whether the string contains the specified sequence of char values. If yes then it returns true else false. It throws NullPointerException of ‘s’ is null.
+String toUpperCase():// All Capital
+public boolean isEmpty(): //This method returns true if the given string has 0 length. If the length of the specified Java String is non-zero then it returns false.
+String replaceAll(String regex, String replacement): //It replaces all the occurrences of substrings that fits the regular expression regex with the replacement string.
+String toLowerCase(): //Equivalent to toLowerCase(Locale. getDefault()).
+String trim(): //Returns the substring after omitting leading and trailing white spaces from the original string.
+char[] toCharArray(): //Converts the string to a character array.
+static String valueOf(): //This method returns a string representation of passed arguments such as int, long, float, double, char and char array.
+int length(): //It returns the length of a String.
+             //unboxing the Object
+Integer i = new Integer(10);
+       int i1 = i;
+String str = "1234";
+int inum = Integer.parseInt(str);
+String str="1122s";
+int num = Integer.valueOf(str);
+               // Collection framework
+import java.util.*;  ->> Importing Collection Framework
+public static void main(String args[]){
+ArrayList<String> list=new ArrayList<String>();//Creating arraylist
+//Traversing list through Iterator
+Iterator itr=list.iterator();
+while(itr.hasNext()){
+System.out.println(itr.next());
+         //List
+//List in Java provides the facility to maintain the ordered collection. It contains the index-based methods to insert, update, delete and search the elements.
+List <data-type> list1= new ArrayList();  //ArrayList is implemented as a resizable array. As more elements are added to ArrayList, its size is increased dynamically.
+List <data-type> list2 = new LinkedList();  //LinkedList implements doubly linked list which requires the traversal through all the elements for searching an element.
+List <data-type> list3 = new Vector();  //Same as ArrayList but synchronized, synchronized means multiple threads can modify the Vector in parallel without risk of data corruption.
+          //List Methods:
+sort(List list):// Sorts the elements of the List in ascending order of their natural ordering.
+Collections.sort() // has sorted the list of String in Lexical order.
+Collections.sort(list, Collections.reverseOrder());// Descending order
+int size(): //to get the number of elements in the list.
+boolean isEmpty(): //to check if list is empty or not.
+boolean contains(Object o): //Returns true if this list contains the specified element.
+Iterator<E> iterator(): //Returns an iterator over the elements in this list in proper sequence.
+Object[] toArray(): //Returns an array containing all of the elements in this list in proper sequence
+boolean add(E e): //Appends the specified element to the end of this list.
+boolean remove(Object o): //Removes the first occurrence of the specified element from this list.
+boolean retainAll(Collection<?> c): //Retains only the elements in this list that are contained in the specified collection.
+void clear(): //Removes all the E elements from the list.
+E get(int index): //Returns the E element at the specified position in the list.
+E set(int index, E element): //Replaces the element at the specified position in the list with the specified element.
+subList(int fromIndex, int toIndex)//Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
+Object[]    toArray()//Returns an array containing all of the elements in this list in proper sequence (from first to last element).
+<T> T[]   toArray(T[] a)//Returns an array containing all of the elements in this list in proper sequence (from first to last element); the runtime type of the returned array is that of the specified array.
+         //Queue
+//Queue is used to hold the elements about to be processed in FIFO(First In First Out) order.
+Queue<String> q1 = new PriorityQueue(); //In a priority queue, elements can be inserted in any order but removal of the elements is in a sorted order.
+Queue<String> q2 = new ArrayDeque(); //ArrayDeque in Java provides a way to apply resizable-array in addition to the implementation of the Deque interface.
+PriorityQueue<String> queue=new PriorityQueue<String>();
+        //Deque
+Deque d = new ArrayDeque();  //Dequeue is a list where every end supports insertion and removal. Double Ended queue
+//Queue methods:
+boolean add(object) //It is used to insert the specified element into this queue and return true upon success.
+boolean offer(object)   //It is used to insert the specified element into this queue.
+Object remove() //It is used to retrieves and removes the head of this queue.
+Object poll()   //It is used to retrieves and removes the head of this queue, or returns null if this queue is empty.
+Object element()    //It is used to retrieves, but does not remove, the head of this queue.
+Object peek()   //It is used to retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
+        //Set
+//A Set is a Collection that cannot contain duplicate elements
+Set<data-type> s1 = new HashSet<data-type>();  //HashSet does not maintain any order of elements,HashSet gives better performance (faster).
+Set<data-type> s2 = new LinkedHashSet<data-type>();  //LinkedHashSet maintains the insertion order.
+Set<data-type> s3 = new TreeSet<data-type>();  //TreeSet elements are sorted in ascending order by default.
+//Map or How to declare different types Map
+Map map = new "AnyTypeOfMap_Below"();
+Map<Integer,String> map = new "AnyTypeOfMap_Below" <Integer,String>();
+HashMap<Integer,String> map = new HashMap<Integer,String>();//Java HashMap class implements the Map interface which allows us to store key and value pair, where keys should be unique. No order
+LinkedHashMap<Integer,String> map = new LinkedHashMap<Integer,String>();// LinkedHashMap maintains insertion order of elements, otherwise same as HashMap
+TreeMap<Integer,String> map = new TreeMap<Integer,String>();//The entries in a TreeMap are always sorted based on the natural ordering of the keys.
+           //Maps methods:
+put(Object key, Object value)   //It is used to insert an entry in the map.
+void putAll(Map map)    //It is used to insert the specified map in the map.
+V putIfAbsent(K key, V value)   //It inserts the specified value with the specified key in the map only if it is not already specified.
+V remove(Object key)    //It is used to delete an entry for the specified key.
+boolean remove(Object key, Object value)    //It removes the specified values with the associated specified keys from the map.
+Set keySet()    //It returns the Set view containing all the keys.
+void clear()    //It is used to reset the map.
+boolean containsValue(Object value) //This method returns true if some value equal to the value exists within the map, else return false.
+boolean containsKey(Object key) //This method returns true if some key equal to the key exists within the map, else return false.
+boolean equals(Object o)    //It is used to compare the specified Object with the Map.
+void forEach(BiConsumer<? super K,? super V> action)  //It performs the given action for each entry in the map until all entries have been processed or the action throws an exception.
+V get(Object key)   //This method returns the object that contains the value associated with the key.
+V getOrDefault(Object key, V defaultValue)  //It returns the value to which the specified key is mapped, or defaultValue if the map contains no mapping for the key.
+int hashCode()  //It returns the hash code value for the Map
+boolean isEmpty()   //This method returns true if the map is empty; returns false if it contains at least one key.
+V replace(K key, V value)   //It replaces the specified value for a specified key.
+boolean replace(K key, V oldValue, V newValue)  //It replaces the old value with the new value for a specified key.
